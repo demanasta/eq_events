@@ -28,7 +28,7 @@ Switches:
 	-h [:= help] help menu
 	Exit Status:    1 -> help message or error
 	Exit Status:    0 -> sucesseful exit
-run:./eq_events.sh -r regparam -fm fmparam -topo -jpg -gsites gps.sites -gvel gps.vel
+run:./eq_events.sh -r regparam -fm fmparam -topo -jpg -gsites gps.sites -gdisp gps.disp
 /******************************************************************************/"
 exit 1
 }
@@ -181,7 +181,7 @@ done
 if [ "$TOPOGRAPHY" -eq 0 ]
 then
 	################## Plot coastlines only ######################
-	pscoast $range $proj -B$frame:."$maptitle": -Df -W0.5/0/0/0 -G195  -U$logo_pos -K > $outfile
+	pscoast $range $proj -B$frame:."$maptitle": -Df -W0.5/0/0/0 -G195  -U$logo_pos -K -X1.8c -Y1.4c> $outfile
 	psbasemap -R -J -O -K --FONT_ANNOT_PRIMARY=10p $scale --FONT_LABEL=10p >> $outfile
 fi
 if [ "$TOPOGRAPHY" -eq 1 ]
@@ -189,7 +189,7 @@ then
 	# ####################### TOPOGRAPHY ###########################
 	# bathymetry
 	makecpt -Cgebco.cpt -T-5000/100/150 -Z > $bathcpt
-	grdimage $inputTopoB $range $proj -C$bathcpt -K > $outfile
+	grdimage $inputTopoB $range $proj -C$bathcpt -K -X1.8c -Y1.4c > $outfile
 	pscoast $proj -P $range -Df -Gc -K -O >> $outfile
 	# land
 	makecpt -Cgray.cpt -T-5000/1800/50 -Z > $landcpt
@@ -209,7 +209,7 @@ echo "N 1" >> .legend
 # ///////////////// PLOT FOCAL MECHANISMS //////////////////////////////////
 if [ "$FMPLOT" -eq 1 ]
 then
-	grep -v "#" $fmplot | psmeca $range -Jm -Sc0.9/10 -CP0.025 -K -O -P >> $outfile
+	grep -v "#" $fmplot | psmeca $range -Jm -Sc0.9/0 -CP0.025 -K -O -P >> $outfile
 	grep -v "#" $fmplot | awk '{print $1, $2}' | psxy -Jm -O -R -Sa0.4c -Gred -K >> $outfile
 fi
 
@@ -225,8 +225,8 @@ fi
 if [ "$GDISP" -eq 1 ]
 then
 
-	grep -v "#" $gdisp | psvelo -R -Jm -Se100/0.95/0 -W2p,red -A10p+e -Gred -O -K -L -V >> $outfile
-# 	grep -v "#" $ | pstext -Jm -R -Dj0.2c/0.2c -Gwhite -O -V -K >> $outfile
+	grep -v "#" $gdisp | psvelo -R -Jm -Se20/0.95/0 -W2p,red -A10p+e -Gred -O -K -L -V >> $outfile
+ 	grep  "#scale" $gdisp | awk '{print $2,$3,$4,$5,$6,$7,$8,$9,$10}'|psvelo -R -Jm -Se20/0.95/12 -W2p,red -A10p+e -Gred -O -K -L -V >> $outfile
 fi
 
 # ///////////////// PLOT GPS VELOCITIES //////////////////////////////////

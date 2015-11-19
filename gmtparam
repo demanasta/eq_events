@@ -4,7 +4,7 @@
 # //////////////////////////////////////////////////////////////////////////////
 # Set PATHS parameters
 pth2dems=${HOME}/Map_project/dems
-inputTopoL=${pth2dems}/ionio.grd
+inputTopoL=${pth2dems}/ETOPO1_gr_resample01m.grd   #ionio.grd
 inputTopoB=${pth2dems}/ETOPO1_gr_resample01m.grd #/ETOPO1_Bed_g_gmt4.grd
 pth2logos=$HOME/Map_project/logos
 

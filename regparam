@@ -1,10 +1,10 @@
 #!/bin/bash
 #configure this file for the main database parameters
-gmtset PS_MEDIA 19.5cx22c
+gmtset PS_MEDIA 18.4cx22c
 frame=0.2
-scale=-Lf20.37/38.41/36:24/10+l+jr
-range=-R20.28/20.92/38.38/38.96
-proj=-Jm20.4/38/1:400000
-logo_pos=BL/19c/0.2c/"DSO[at]NTUA"
-logo_pos2="-C12.8c/0.15c"
+scale=-Lf20.34/38.04/36:24/20+l+jr
+range=-R20.17/21.15/38/38.96
+proj=-Jm20.2/38/1:600000
+logo_pos=BL/8.4c/.1c/"DSO[at]NTUA"
+logo_pos2="-C13c/0.6c"
 legendc="-Jx1i -R0/8/0/8 -Dx0.3c/0.6c/3.6c/4.3c/BL"     
