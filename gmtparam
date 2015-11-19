@@ -4,9 +4,17 @@
 # //////////////////////////////////////////////////////////////////////////////
 # Set PATHS parameters
 pth2dems=${HOME}/Map_project/dems
-inputTopoL=${pth2dems}/ETOPO1_Bed_g_gmt4.grd
-inputTopoB=${pth2dems}/ETOPO1_Bed_g_gmt4.grd
+inputTopoL=${pth2dems}/ionio.grd
+inputTopoB=${pth2dems}/ETOPO1_gr_resample01m.grd #/ETOPO1_Bed_g_gmt4.grd
 pth2logos=$HOME/Map_project/logos
+
+# //////////////////////////////////////////////////////////////////////////////
+# Pre-defined parameters for GMT
+outfile=test.eps
+out_jpg=test.jpg
+landcpt=land_man.cpt
+bathcpt=bath_man.cpt
+maptitle=""
 
 # //////////////////////////////////////////////////////////////////////////////
 # Set Network Style Ploting
@@ -33,13 +41,7 @@ roads_style="-Sc0.12c -W0.01c/0 -Gblack"
 sing_style="-St0.18c -W0.01c/0 -Gblue"
 
 
-# //////////////////////////////////////////////////////////////////////////////
-# Pre-defined parameters for GMT
-outfile=test.eps
-out_jpg=test.jpg
-landcpt=land_man.cpt
-bathcpt=bath_man.cpt
-maptitle=""
+
 
 # //////////////////////////////////////////////////////////////////////////////
 # Set FILE parameters
