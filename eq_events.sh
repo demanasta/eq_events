@@ -209,8 +209,8 @@ echo "N 1" >> .legend
 # ///////////////// PLOT FOCAL MECHANISMS //////////////////////////////////
 if [ "$FMPLOT" -eq 1 ]
 then
-	grep -v "#" $fmplot | psmeca $range -Jm -Sc0.9/0 -CP0.025 -K -O -P >> $outfile
-	grep -v "#" $fmplot | awk '{print $1, $2}' | psxy -Jm -O -R -Sa0.4c -Gred -K >> $outfile
+	grep -v "#" $fmplot | psmeca $range -Jm -Sc0.9/10 -CP0.025 -K -O -P >> $outfile
+# 	grep -v "#" $fmplot | awk '{print $1, $2}' | psxy -Jm -O -R -Sa0.4c -Gred -K >> $outfile
 fi
 
 # ///////////////// PLOT GPS STATIONS //////////////////////////////////
@@ -240,6 +240,46 @@ fi
 echo "G 0.2c" >> .legend
 echo "D 0.3c 1p" >> .legend
 
+
+echo "20.39 38.22 6 18 67 164 114 75 24 6.0 0 20.31 38.09 Jan26, Mw=6.0" | awk '{print $1, $2}' | psxy -Jm -O -R -Sa0.4c -Gblue -K >> $outfile
+
+echo "20.3737 38.2535 10.5 294 78 35 196 56 166 5.9 0 20.32 38.37 Feb 3, Mw=5.9" | awk '{print $1, $2}' | psxy -Jm -O -R -Sa0.4c -Gred -K >> $outfile
+
+
+psvelo <<EOF -Jm $range -Se40/0.95/0 -W2p,blue -Gblue  -A10p+e -L -V -O -K>> $outfile  # 205/133/63
+20.5886441 38.1768271 -0.018 -0.008 0 0 0 vlsm
+20.43816 38.19571 0.029 -0.056 0 0 0 kefa
+#20.28 37.96 0.02 0 0 0 0 
+EOF
+
+psvelo <<EOF -Jm $range -Se40/0.95/0 -W2p,red -Gred  -A10p+e -V -O -K -X1.16c -Y-2.24c>> $outfile  # 205/133/63
+#20.5886441 38.1768271 -0.010 -0.009 0 0 0 vlsm
+20.43816 38.19571 0.031 -0.091 0 0 0 kefa
+#20.28 37.96 0.02 0 0 0 0 
+EOF
+
+psvelo <<EOF -Jm $range -Se40/0.95/0 -W2p,red -Gred  -A10p+e -V -O -K -X-1.87c -Y1.92c>> $outfile  # 205/133/63
+20.5886441 38.1768271 -0.010 -0.009 0 0 0 vlsm
+#20.43816 38.19571 0.031 -0.091 0 0 0 kefa
+#20.28 37.96 0.02 0 0 0 0 
+EOF
+# 
+# 
+### plot total displacement
+# awk '{print $2,$3,$5-23.6,$7-11.4,$6,$8,0,$1}' kefallonia.vel | psvelo -Jm $range -Se0.2/0.95/0 -W0.15p,black -Gred -L -A0.07/0.20/0.12 -V -O -K >> $outfile  # 205/133/63
+psvelo <<EOF  -R -Jm -Se40/0.95/0 -W2p,red -A10p+e -Gred -O -K -L -V -X0.71 -Y0.32 >> $outfile  # 205/133/63
+#20.5886441 38.1768271 -0.028 -0.017 0 0 0 vlsm
+#20.43816 38.19571 0.060 -0.147 0 0 0 kefa
+#20.34835 38.20318 -0.010 0.07 0 0 0 kipo
+20.8 37.97 0.03 0 0 0 0  30 mm
+EOF
+# 
+echo "20.8 37.97 9 0 1 RM 30 mm" | pstext -Jm -R -Dj0.2c/0.2c  -O -V -K >> $outfile
+
+
+
+
+
 # ///////////////// PLOT LEGEND //////////////////////////////////
 if [ "$LEGEND" -eq 1 ]
 then
@@ -247,8 +287,8 @@ then
 fi
 
 #/////////////////FINESH SCRIPT
-psimage $pth2logos/DSOlogo2.eps -O $logo_pos2 -W1.1c -F0.4 >>$outfile
-
+# psimage $pth2logos/DSOlogo2.eps -O $logo_pos2 -W1.1c -F0.4 >>$outfile
+echo "9999 9999" | gmt psxy -J -R -O >> $outfile
 #################--- Convert to jpg format ----##########################################
 if [ "$OUTJPG" -eq 1 ]
 then
